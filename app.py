@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_stl import stl_from_file
 import os
 from openai import OpenAI
 from stl import mesh
@@ -352,18 +353,20 @@ if st.button("Evaluate Part"):
 
     if stl_file and os.path.exists(stl_file):
 
-        with open(stl_file, "rb") as file:
-            st.download_button(
-                label="Download STL File",
-                data=file,
-                file_name=os.path.basename(stl_file),
-                mime="application/sla"
-            )
+       stl_from_file(
+           file_path=stl_file,
+           material="material",
+           auto_rotate=True,
+           height=500,
+           shininess=100,
+           cam_v_angle=60,
+           cam_h_angle=90,
+           cam_distance=0
+      )
 
-        st.success("STL file available for download")
-
+       
     else:
-        st.warning("⚠️ 3D model not available")
+     st.warning("⚠️ 3D model not available")
 
     # AI
     st.markdown("## 🤖 AI Recommendations")
