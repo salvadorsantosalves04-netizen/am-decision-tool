@@ -352,24 +352,27 @@ if st.button("Evaluate Part"):
 
     if stl_file and os.path.exists(stl_file):
 
-    with open(stl_file, "rb") as file:
-        st.download_button(
-            label="Download STL File",
-            data=file,
-            file_name=os.path.basename(stl_file),
-            mime="application/sla"
-        )
+        with open(stl_file, "rb") as file:
+            st.download_button(
+                label="Download STL File",
+                data=file,
+                file_name=os.path.basename(stl_file),
+                mime="application/sla"
+            )
 
-       st.success("STL file available for download")
+        st.success("STL file available for download")
+
     else:
-       st.warning("⚠️ 3D model not available")
+        st.warning("⚠️ 3D model not available")
 
     # AI
     st.markdown("## 🤖 AI Recommendations")
+
     try:
         ai_output = get_ai_recommendation(
             part, load, temperature, chemical, pressure, weather, result
         )
         st.write(ai_output)
-    except:
-        st.warning("⚠️ AI unavailable")
+
+    except Exception as e:
+        st.warning(f"⚠️ AI unavailable: {e}")
