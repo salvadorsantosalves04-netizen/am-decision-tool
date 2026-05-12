@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_stl import stl_from_file
+from streamlit_stl_viewer import stl_viewer
 import os
 from openai import OpenAI
 from stl import mesh
@@ -74,7 +74,7 @@ st.write(f"Operational Urgency: {urgency}")
 # -------------------------
 # CAD PATH
 # -------------------------
-BASE_DIR = r"C:\Users\Utilizador\Salvador\intership\am_tool"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 cad_models = {
     "Collar": os.path.join(BASE_DIR, "cad_models", "collar.stl")
@@ -351,7 +351,7 @@ if st.button("Evaluate Part"):
     # CAD Viewer
     st.markdown("## 3D Model")
     if stl_file and os.path.exists(stl_file):
-        stl_from_file(file_path=stl_file, height=500)
+        stl_viewer(stl_file)
     else:
         st.warning("⚠️ 3D model not available")
 
