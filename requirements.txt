@@ -1,5 +1,4 @@
 streamlit
-streamlit-stl-viewer
 openai
 numpy
 numpy-stl
